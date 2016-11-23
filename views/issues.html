@@ -1,0 +1,31 @@
+<div layout="column" flex ng-cloak id="issuePage">
+  <md-content flex layout-padding>
+    <md-card>
+      <h2 class="md-title">{{title}}</h2>
+      <md-table-container>
+        <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+          <thead md-head md-on-reorder="listIssues">
+            <tr md-row>
+              <th md-column md-numeric><span>Issue #</span></th>
+              <th md-column><span>Issue title</span></th>
+              <th md-column>Raised on</th>
+              <th md-column>Raised by</th>
+              <th md-column>Assigned to</th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row ng-repeat="issue in issues | limitTo: query.limit : (query.page -1) * query.limit">
+              <td md-cell><a href ng-click="openInNewTab(issue.html_url)">{{issue.number}}</a></td>
+              <td md-cell><a href ng-click="issueDescribe(issue.title,issue.body)">{{issue.title}}</a></td>
+              <td md-cell>{{getDate(issue.updated_at)}}</td>
+              <td md-cell><a href ng-click="openInNewTab(issue.user.html_url)">{{issue.user.login}}</a></td>
+              <td md-cell><a href ng-click="openInNewTab(getAssigneeUrl(issue.assignee))">{{getAssignedTo(issue.assignee)}}</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+      <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{issues.length}}"
+        md-on-paginate="logPagination" md-page-select></md-table-pagination>
+    </md-card>
+  </md-content>
+</div>

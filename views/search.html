@@ -1,0 +1,37 @@
+<div layout="column" flex ng-cloak id="popupContainer">
+  <div layout="row" flex>
+    <md-content layout="column" flex layout-fill layout-padding>
+      <md-card>
+        <form layout="row" layout-sm="column" layout-align="center center" layout-wrap ng-submit="search()">
+          <md-input-container md-theme="input" flex>
+            <label>GitHub Repo</label>
+            <input ng-model="searchUrl">
+          </md-input-container>
+          <md-button type="submit" aria-label="Search">
+            <ng-md-icon icon="search"></ng-md-icon>
+          </md-button>
+        </form>
+        <md-table-container>
+          <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+            <thead md-head>
+              <tr md-row>
+                <th md-column md-numeric><span>Total Open Issues</span></th>
+                <th md-column md-numeric><span>Issues opened < 24 hours ago</span></th>
+                <th md-column md-numeric>Issues opened > 24 hours ago but < 7 days ago</th>
+                <th md-column md-numeric>Issues opened > 7 days ago</th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row>
+                <td md-cell><a href ng-click="listIssues('all')">{{formData.total}}</a></td>
+                <td md-cell><a href ng-click="listIssues('today')">{{formData.today.length}}</a></td>
+                <td md-cell><a href ng-click="listIssues('thisWeek')">{{formData.thisWeek.length}}</a></td>
+                <td md-cell><a href ng-click="listIssues('prev')">{{formData.prev.length}}</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+      </md-card>
+    </md-content>
+  </div>
+</div>

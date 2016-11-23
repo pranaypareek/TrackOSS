@@ -1,0 +1,10 @@
+{
+  "name": "fe",
+  "dependencies": {
+    "angular": "latest",
+    "angular-resource": "latest",
+    "angular-material": "latest",
+    "angular-ui-router": "latest",
+    "angular-material-data-table":"latest"
+    }
+}
